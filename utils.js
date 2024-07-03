@@ -1,22 +1,22 @@
 const fs = require('fs');
 function json_check(x,a){
-    let j=JSON.parse(fs.readFileSync(__dirname+"/data/" + x + ".json"));
+    let j=JSON.parse(fs.readFileSync("/data/" + x + ".json"));
     return j[a]!=undefined;
 }
 function json_set(x,a,b){
-    let j=JSON.parse(fs.readFileSync(__dirname+"./data/" + x + ".json"));
+    let j=JSON.parse(fs.readFileSync("./data/" + x + ".json"));
     j[a] = b;
-    return fs.writeFileSync(__dirname+"./data/" + x + ".json", JSON.stringify(j));
+    return fs.writeFileSync("./data/" + x + ".json", JSON.stringify(j));
 }
 function json_get(x,a){
-    let j=JSON.parse(fs.readFileSync(__dirname+"./data/" + x + ".json"));
+    let j=JSON.parse(fs.readFileSync("./data/" + x + ".json"));
     return j[a];
 }
 function json_gf(x){
-    return JSON.parse(fs.readFileSync(__dirname+"./data/" + x + ".json"));
+    return JSON.parse(fs.readFileSync("./data/" + x + ".json"));
 }
 function json_sf(x,y){
-    fs.writeFileSync(__dirname+"./data/" + x + ".json", y);
+    fs.writeFileSync("./data/" + x + ".json", y);
 }
 function confirm_identity(a,b,c,d){
     let x = JSON.parse(fs.readFileSync("./data/users.json"));
