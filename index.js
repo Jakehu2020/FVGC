@@ -145,6 +145,6 @@ app.post("/tasks", (req,res) => {
     utils.json_sf("tasks", JSON.stringify(taskJSON));
 })
 
-server.listen(3000, () => {
+server.listen(8080, () => {
     console.log("Server is starting");
 });
