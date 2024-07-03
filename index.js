@@ -10,10 +10,10 @@ const utils = require("./utils.js");
 const JakeBot = require("./Jakebot.js");
 
 app.engine("html", require("ejs").renderFile);
-app.set("views", "src");
+app.set("views", __dirname+"/src");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("res"));
+app.use(express.static('public'));
 
 app.use(require('cookie-parser')());
 app.use(require("cors")());
@@ -31,6 +31,11 @@ function info(req) {
         user: undefined
     };
 }
+
+app.use((req, res, next) => {
+    console.log(`Incoming request for ${req.originalUrl}`);
+    next();
+});
 
 app.get("/", (req, res) => {
     let x = info(req.cookies);
