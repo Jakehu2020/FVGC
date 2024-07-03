@@ -1,5 +1,4 @@
 {
-	"framework": null,
 	"installCommand": null,
 	"buildCommand": "",
 	"outputDirectory": "public"
