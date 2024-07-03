@@ -4,6 +4,7 @@ const app = express();
 
 const server = require("http").Server(app);
 const fs = require("fs");
+const path = require("path");
 const io = require('socket.io')(server);
 
 const utils = require("./utils.js");
@@ -13,7 +14,7 @@ app.engine("html", require("ejs").renderFile);
 app.set("views", __dirname+"/src");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("res"));
+app.use(express.static(path.join(__dirname, 'res')));
 
 app.use(require('cookie-parser')());
 app.use(require("cors")());
