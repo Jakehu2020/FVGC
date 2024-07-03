@@ -1,5 +1,1 @@
-{
-	"installCommand": null,
-	"buildCommand": "",
-	"outputDirectory": "public"
-}
+{ "version": 2, "rewrites": [{ "source": "/(.*)", "destination": "/api" }] }
