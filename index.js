@@ -13,7 +13,7 @@ app.engine("html", require("ejs").renderFile);
 app.set("views", __dirname+"/src");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('res'));
+app.use(express.static('public'));
 
 app.use(require('cookie-parser')());
 app.use(require("cors")());
