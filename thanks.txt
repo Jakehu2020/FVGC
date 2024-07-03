@@ -1,0 +1,10 @@
+I used:
+Open Web Calendar: https://open-web-calendar.hosted.quelltext.eu/
+Ionic Ionicons: https://ionic.io/
+Bootstrap v5.0: https://getbootstrap.com/
+JQuery: https://jquery.com/
+SweetAlert: https://sweetalert2.github.io/
+ExpressJS: https://expressjs.com/
+Embedded JS: https://ejs.co/
+SocketIO: https://socket.io/
+Roboto & Material Fonts: https://fonts.google.com/

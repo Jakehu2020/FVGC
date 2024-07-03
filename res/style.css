@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap');
+
+* {
+    transition: all 0.5s;
+}
+
+html {
+    overflow-x: hidden none;
+}
+
+body {
+    background: #e5e7eb;
+}
+
+.overtext {
+    font-size: 130px;
+    z-index: 15;
+    overflow-y: hidden;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+nav {
+    color: white;
+}
+
+.input {
+    height: 50px;
+    width: 480px;
+    border-radius: 24px;
+    border: 2px solid grey;
+    text-align: center;
+}
+
+.login {
+    border-radius: 12px;
+    width: 300px;
+    height: 60px;
+    border: 2px solid grey;
+    background: white;
+    transition: all 0.5s;
+    text-shadow: 9 12 15px yellow;
+}
+
+.login:hover {
+    border-radius: 24px;
+    background: linear-gradient(90deg, #fcba03, #03b5fc);
+}
+
+.swal2-container {
+    z-index: 30
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(135.88deg, #ECEFFF 2.25%, #DEF7EE 27.5%, #D0E7F6 61.65%, #DFDFFE 97.3%);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #1D2130;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3C435E;
+}
+
+.md-form {
+    position: absolute;
+    left: 35%;
+    top: 10%;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.navbar-nav>li {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.notification {
+    transition: all 0.5s;
+    background-color: rgb(147, 147, 255);
+    border: 1px solid #363636;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding: 20px;
+    position: absolute;
+    width: 150px;
+    cursor: pointer;
+}
+
+.timer_notify {
+    width: 100%;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    height: 2px;
+}
+
+.plink {
+    color: rgb(154, 154, 154);
+    font-weight: 700;
+}
+
+.plink2 {
+    float: right;
+    padding-right: 20px;
+    margin: auto !important;
+}
+
+.flex {
+    display: flex;
+    gap: 10px;
+}
+
+.searchsubmit {
+    padding-right: 10px;
+}
+
+.sidebar {
+    width: 30px;
+    height: 30px;
+}
+
+.sidebar:hover {
+    color: #a4a4ff;
+}
+
+.tm {
+    margin: auto;
+}
+
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.mb-auto {
+    margin-bottom: auto !important;
+}
+
+.sidenavbar {
+    position: fixed;
+}

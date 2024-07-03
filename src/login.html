@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.html") %>
+        <title>Login - Future Voices Toastmasters Website</title>
+</head>
+
+<body>
+    <%- include("./partials/sidebar_start.html") %>
+    <form align="center" class="md-form" role="search" action="/login" method="POST">
+        <h1 class="overtext">Login</h1>
+        <br><br>
+        <input class="input" name="login" placeholder="Username...">
+        <br><br>
+        <input class="input" name="password" placeholder="Password..." type="password">
+        <br><br>
+        <input type="checkbox" name="stayin">&nbsp;Keep me in for 30 days
+        <br><br>
+        <button type="submit" class="login">Login</button>
+        <br><br>
+    </form>
+    <script src="global.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

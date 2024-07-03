@@ -1,0 +1,186 @@
+* {
+    transition: all 1s;
+}
+
+body {
+    background: #e5e7eb;
+    overflow-x: hidden;
+}
+
+.chat {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    /* padding: 5px; */
+    /* right: -100px !important; */
+    width: 91%;
+    margin: auto;
+    bottom: 10px;
+    right: -175px;
+}
+
+.chattext {
+    width: 70%;
+    height: 40px;
+    border-radius: 20px;
+    text-align: center;
+    border: 0;
+}
+
+.chatsubmit {
+    border-radius: 5px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.submiticon {
+    width: 40px;
+    height: 40px;
+    color: #0b72fa;
+    cursor: pointer;
+}
+
+.chatlog {
+    /* float: right; */
+    margin: auto;
+    text-align: center;
+    /* position: absolute; */
+    left: auto;
+    right: auto;
+}
+
+.sidenavbar {
+    position: fixed;
+}
+
+.chat_container {
+    border: none;
+    width: 500px;
+    margin: auto;
+    border-radius: 3px;
+    word-wrap: break-word;
+}
+
+.container {
+    /* max-width: 600px; */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
+.subheader {
+    text-align: center;
+}
+
+.task-input {
+    width: 70%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.task-form {
+    text-align: center;
+}
+
+.task-form button {
+    background-color: #4d79ff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.task-item button.x {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.task-item button.checkmark,
+button.trash {
+    /* color: #fff; */
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.task-item button.x:hover {
+    background-color: #e60000;
+}
+
+.task-item button.checkmark:hover,
+.checked {
+    background-color: #2bc72b;
+}
+
+.hidden {
+    visibility: hidden;
+    display: none;
+}
+
+.dropdown-item {
+    display: flex;
+}
+
+.app {
+    width: 312.5px;
+    height: 230px;
+    border-radius: 50px;
+    border: 1px solid black;
+    float: right;
+    padding: 20px;
+    margin: 20px;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.timer_text {
+    /* display: flex; */
+    text-align: center;
+    margin: auto;
+}
+
+.timer_t {
+    width: 25px;
+    margin: 0 auto;
+}
+
+.timer_btn {
+    background-color: #4d79ff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.calendar_frame {
+    display: block;
+    margin: 0 auto;
+}
