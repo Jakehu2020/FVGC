@@ -1,7 +1,15 @@
-
 {
-    "name": "express",
-    "builds": [
-        { "src": "**/*.js", "use": "@now/node" }
-    ]
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/res/(.*)",
+      "dest": "/res/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
+    }
+  ]
 }
