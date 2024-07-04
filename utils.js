@@ -31,6 +31,14 @@ let crypt = {
     decodehex: x => Buffer.from(x, 'hex').toString('ascii'),
 }
 
+function replace(a, obj){
+    let b = a.toString();
+    Object.getOwnPropertyNames(obj).forEach(n => {
+        b = b.replace(`[ ${n} ]`, obj[n]);
+    });
+    return b;
+}
+
 module.exports = {
-    json_check, json_set, json_get, json_gf, json_sf, crypt, confirm_identity
+    json_check, json_set, json_get, json_gf, json_sf, crypt, confirm_identity, replace
 }

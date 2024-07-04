@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.html") %>
+        <title>404 Not Found - Future Voices Toastmasters Website</title>
+</head>
+
+<body>
+    <% if(user){ %>
+        <%- include("./partials/sidebar.html") %>
+        <link rel="stylesheet" href="home.css">
+    <% } else { %>
+        <%- include("./partials/sidebar_start.html") %>
+    <% } %>
+    <h1 class="subheader center large">404 Not Found</h1><br>
+    <script src="/global.js"></script>
+    <script>notify("If you find any, report issues to futurevoicesgc@gmail.com")</script>
+</body>
+
+</html>

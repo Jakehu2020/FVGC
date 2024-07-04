@@ -8,6 +8,7 @@ const io = require('socket.io')(server);
 
 const utils = require("./utils.js");
 const JakeBot = require("./Jakebot.js");
+const nm = require("./nodemailer.js");
 
 app.engine("html", require("ejs").renderFile);
 app.set("views", "src");
@@ -143,8 +144,21 @@ app.post("/tasks", (req,res) => {
         // req.body = { request: "delete", task: "..."}
     }
     utils.json_sf("tasks", JSON.stringify(taskJSON));
+});
+
+app.use((req,res,next) => {
+    res.render("404.html", info(req.cookies));
+    next();
 })
 
-server.listen(3000, () => {
-    console.log("Server is starting");
-});
+app.post("/verifyemail", (req,res) => {
+    let email = req.body.email;
+    let USER = info(req.cookies).user;
+    let p = (`000000`+Math.floor(Math.random()*1000000));
+    p = p.substring(p.length-6,p.length)
+    if(!USER) { return; }
+    nm.send(email, "Email Verification Code", utils.replace(nm.getEmailHTML("email_verify"), { VERIFICATION_CODE: p, USER }));
+    res.send(p);
+})
+
+server.listen(3000, () => console.log("Server is starting"));

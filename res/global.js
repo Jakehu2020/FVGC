@@ -8,12 +8,13 @@ setTimeout(() => {
         document.querySelector(".sidebarstart_ul").style.height = innerHeight - 78 + "px";
     }
 }, 20);
-
-if (location.href.endsWith("/~")) {
-    document.querySelector(".HOME").classList.add("active");
-} else if (document.querySelector("." + location.pathname.substring(1, 999).toUpperCase())) {
-    document.querySelector("." + location.pathname.substring(1, 999).toUpperCase()).classList.add("active");
-}
+try {
+    if (location.href.endsWith("/~")) {
+        document.querySelector(".HOME").classList.add("active");
+    } else if (document.querySelector("." + location.pathname.substring(1, 999).toUpperCase())) {
+        document.querySelector("." + location.pathname.substring(1, 999).toUpperCase()).classList.add("active");
+    }
+} catch(e) { / Just the URL../}
 
 let socket = io();
 document.body.scrollTop = document.documentElement.scrollTop = 0;
