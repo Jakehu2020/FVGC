@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.html") %>
+        <title>Future Voices Toastmasters Website</title>
+        <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <%- include("./partials/sidebar.html") %>
+        <h1 class="subheader">Settings</h1>
+        <br><br>
+        <div class="flexbox sflex">
+            <table class="stb">
+                <tbody>
+                    <tr>
+                        <td>ACCOUNT</td>
+                    </tr>
+                    <tr>
+                        <td>SECURITY</td>
+                    </tr>
+                    <tr>
+                        <td>PROFILE</td>
+                    </tr>
+                    <tr>
+                        <td>NOTIFICATIONS</td>
+                    </tr>
+                    <tr>
+                        <td>INTERFACE</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="scontainer">
+                <h2 class="subheader" id="ACCOUNT">Account</h2>
+                <h4 class="settings_head">Username: <%- user %></h4>
+                <p class="settxt">Currently, you cannot change your username. People can refer to you by @<%- user %>.</p>
+                <h4 class="settings_head">Email: <%- data[1]? "" : "None" %></h4>
+                <% if(data[1]){ %>
+                <div class="settings_email">
+                    <span class="set_p"><%- data[1] %></span>
+                    <span>
+                        <button class="se_select grey email_change"><ion-icon name="build-outline"></ion-icon></button>
+                    </span>
+                    <span>
+                        <button class="se_select red email_delete"><ion-icon name="trash-outline"></ion-icon></button>
+                    </span>
+                </div>
+                <% } else { %>
+                    <span>
+                        <button class="se_select grey email_add"><ion-icon name="add-outline"></ion-icon></button>
+                    </span>
+                <% } %>
+                <h4 class="settings_head">Name: <%- data[2]? "" : "None" %></h4>
+                <input placeholder="Full name (optional)" maxlength="255" type="text" class="settings_name">
+                <h1 style="font-size:99999px"><br></h1>
+                <h2 id="INTERFACE" class="subheader">Interface</h2>
+            </div>
+        </div>
+        <script>data = JSON.parse(`<%- JSON.stringify(data) %>`)</script>
+        <script src="settings.js"></script>
+        <script src="global.js"></script>
+</body>
+
+</html>

@@ -19,8 +19,8 @@ function json_sf(x,y){
     fs.writeFileSync("./data/" + x + ".json", y);
 }
 function confirm_identity(a,b,c,d){
-    let x = JSON.parse(fs.readFileSync("./data/users.json"));
-    let y = crypt.decodeb64(a) == crypt.decodehex(b) && crypt.decodeb64(c) == crypt.decodehex(String(d));
+    let x = json_gf('users');
+    let y = crypt.decodeb64(a) == crypt.decodehex(b) && crypt.decodeb64(c) == crypt.decodehex(String(d)) && crypt.decodeb64(x[crypt.decodeb64(a)][0]) == crypt.decodeb64(c);
     return y;
 }
 

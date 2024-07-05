@@ -184,3 +184,95 @@ button.trash {
     display: block;
     margin: 0 auto;
 }
+
+.settings_side {
+    width: 100px;
+    /* display: flex; */
+    display: inline-block;
+}
+
+.scontainer {
+    /* min-height: 900px; */
+    /* display: inline-block; */
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    width: 80% !important;
+}
+
+.flexbox {
+    display: flex;
+}
+
+.sflex {
+    /* position: absolute; */
+    /* margin: 50px; */
+    float: right;
+    width: 90%;
+    gap: 15px;
+}
+
+.stb {
+    /* border: 1px solid black; */
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+td {
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    border-collapse: collapse;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.se_select {
+    background-color: #707070;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.settings_email .set_p {
+    font-weight: 500;
+    text-decoration: underline;
+}
+table {
+    height: 200px;
+}
+tbody {
+    background: #0288d1;;
+    color: white;
+    font-size: 1vw;
+    font-family: Roboto, Arial;
+}
+.tr {
+    border: #8b8b8b;
+}
+@keyframes bs {
+    0% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: -10px 8px 99px;
+    }
+}
+.settings_name {
+    width: 530px;
+    font-family: Roboto, Arial;
+    padding: 4px;
+}
+
+/*
+
+3D Mode (warning):*/
+
+/* * {
+    animation: bs ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+} */

@@ -14,7 +14,7 @@ try {
     } else if (document.querySelector("." + location.pathname.substring(1, 999).toUpperCase())) {
         document.querySelector("." + location.pathname.substring(1, 999).toUpperCase()).classList.add("active");
     }
-} catch(e) { / Just the URL../}
+} catch(e) { / Just the URL.. /}
 
 let socket = io();
 document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -72,3 +72,4 @@ function post(uri, data) {
         body: JSON.stringify(data)
     })
 }
+// post()
