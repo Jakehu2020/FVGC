@@ -122,7 +122,7 @@ app.post("/signup", (req, res) => {
 app.post("/login", (req, res) => {
     let user = req.body.login;
     let pass = req.body.password;
-    if (utils.json_get("users", user) && utils.crypt.decodeb64(utils.json_get("users", user)) == pass) {
+    if (utils.json_get("users", user) && utils.crypt.decodeb64(utils.json_get("users", user)[0]) == pass) {
         res.cookie("usr_token", utils.crypt.encodeb64(user), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000 })
         res.cookie("usr_key", utils.crypt.encodehex(user), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000 })
         res.cookie("secure", utils.crypt.encodeb64(pass), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000 })

@@ -72,4 +72,8 @@ function post(uri, data) {
         body: JSON.stringify(data)
     })
 }
-// post()
+
+window.addEventListener('beforeunload', function (e) {
+    // How to prevent user from leaving:
+    // e.preventDefault(); return "";
+});

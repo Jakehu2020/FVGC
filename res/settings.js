@@ -1,3 +1,4 @@
+location.hash = "";
 document.querySelectorAll("tr").forEach(x => {
     x.addEventListener("click", (e) => {
         location.hash = "#" + x.innerText;
