@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.html") %>
+        <title>Future Voices Toastmasters Website</title>
+        <style>
+            .sw-body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .stopwatch {
+                text-align: center;
+                background: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 500px;
+                width: 90%;
+                display: block;
+            }
+
+            .time {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+            }
+
+            .laps {
+                margin-top: 20px;
+                max-height: 200px;
+                overflow-y: auto;
+                text-align: left;
+            }
+
+            .lap {
+                padding: 5px;
+                border-bottom: 1px solid #ddd;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include("../partials/sidebar.html") %>
+        <div class="sw-body">
+            <div class="stopwatch">
+                <div class="time" id="display">00:00:00.000</div>
+                <div class="buttons">
+                    <button id="startStopBtn">Start</button>
+                    <button id="resetBtn">Reset</button>
+                    <button id="lapBtn">Lap</button>
+                </div>
+                <div class="laps" id="laps"></div>
+            </div>
+        </div>
+        <script>
+            let startTime, updatedTime, difference, timerInterval, isRunning = false, laps = [];
+
+            const display = document.getElementById('display');
+            const startStopBtn = document.getElementById('startStopBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const lapBtn = document.getElementById('lapBtn');
+            const lapsContainer = document.getElementById('laps');
+
+            function startStopwatch() {
+                startTime = new Date().getTime();
+                timerInterval = setInterval(() => {
+                    updatedTime = new Date().getTime();
+                    difference = updatedTime - startTime;
+                    display.innerHTML = timeToString(difference);
+                }, 10);
+                startStopBtn.textContent = 'Pause';
+                isRunning = true;
+            }
+
+            function pauseStopwatch() {
+                clearInterval(timerInterval);
+                startStopBtn.textContent = 'Start';
+                isRunning = false;
+            }
+
+            function resetStopwatch() {
+                clearInterval(timerInterval);
+                display.innerHTML = '00:00:00.000';
+                startStopBtn.textContent = 'Start';
+                laps = [];
+                updateLaps();
+                isRunning = false;
+            }
+
+            function recordLap() {
+                if (isRunning) {
+                    laps.push(timeToString(difference));
+                    updateLaps();
+                }
+            }
+
+            function timeToString(time) {
+                let diffInHrs = time / 3600000;
+                let hh = Math.floor(diffInHrs);
+
+                let diffInMin = (diffInHrs - hh) * 60;
+                let mm = Math.floor(diffInMin);
+
+                let diffInSec = (diffInMin - mm) * 60;
+                let ss = Math.floor(diffInSec);
+
+                let diffInMs = (diffInSec - ss) * 1000;
+                let ms = Math.floor(diffInMs);
+
+                let formattedMM = mm.toString().padStart(2, '0');
+                let formattedSS = ss.toString().padStart(2, '0');
+                let formattedMS = ms.toString().padStart(3, '0');
+
+                return `${formattedMM}:${formattedSS}.${formattedMS}`;
+            }
+
+            function updateLaps() {
+                lapsContainer.innerHTML = '';
+                laps.forEach((lap, index) => {
+                    let lapElement = document.createElement('div');
+                    lapElement.className = 'lap';
+                    lapElement.textContent = `Lap ${index + 1}: ${lap}`;
+                    lapsContainer.appendChild(lapElement);
+                });
+            }
+
+            startStopBtn.addEventListener('click', () => {
+                if (!isRunning) {
+                    startStopwatch();
+                } else {
+                    pauseStopwatch();
+                }
+            });
+
+            resetBtn.addEventListener('click', resetStopwatch);
+            lapBtn.addEventListener('click', recordLap);
+
+
+        </script>
+        <script src="/global.js"></script>
+</body>
+
+</html>

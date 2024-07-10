@@ -1,4 +1,7 @@
-// BASH: npm install express ejs cookie-parser cors
+// BASH: npm install express ejs cookie-parser cors 
+// Maybe this? googleapis@105 @google-cloud/local-auth@2.1.0 --save
+// https://www.toastmastersclubs.org/welcome/?PtzU
+
 const express = require("express");
 const app = express();
 
@@ -86,13 +89,22 @@ app.get("/settings", (req, res) => {
     if (!x.user) { res.redirect("/login?msg=You+Haven't+Logged+In+Yet"); }
     res.render("settings.html", x);
 })
-
 app.get("/signout", (req, res) => {
     res.clearCookie("usr_token");
     res.clearCookie("usr_key");
     res.clearCookie("secure");
     res.clearCookie("_Secure");
     res.redirect("/");
+});
+app.get("/apps/:appID", (req,res) => {
+    let x = info(req.cookies);
+    if(!fs.existsSync(`./src/apps/${req.params.appID}.html`)){ return res.status(404).render("404.html", x); }
+    res.render(`apps/${req.params.appID}.html`, x);
+})
+app.get("/data", (req, res) => {
+    let x = info(req.cookies);
+    if (!x.user) { res.redirect("/login?msg=You+Haven't+Logged+In+Yet"); }
+    res.render("data.html", x);
 })
 
 io.on('connection', (socket) => {
@@ -190,8 +202,7 @@ app.post("/verifycode", (req, res) => {
 
 server.listen(3000, () => console.log("Server is starting"));
 
-// Putting this last so I don't forget my mistakes.
 app.use((req, res, next) => {
-    res.render("404.html", info(req.cookies));
+    res.status(404).render("404.html", info(req.cookies));
     next();
 });

@@ -156,9 +156,7 @@ button.trash {
     float: right;
     padding: 20px;
     margin: 20px;
-    /* display: flex; */
-    /* justify-content: center;
-    align-items: center; */
+    cursor: pointer;
 }
 
 .timer_text {
@@ -256,16 +254,6 @@ tbody {
 
 .tr {
     border: #8b8b8b;
-}
-
-@keyframes bs {
-    0% {
-        box-shadow: none;
-    }
-
-    100% {
-        box-shadow: -10px 8px 99px;
-    }
 }
 
 .settings_input {
@@ -391,8 +379,20 @@ input[type="checkbox"]:checked::before {
 
 3D Mode (warning):*/
 
-/* * {
-    animation: bs ease 3s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-} */
+.fades {
+    box-shadow: 5px 5px 10 0px;
+}
+
+.threed {
+    box-shadow: -10px 8px 3px #aeaeae;
+}
+
+.appicon {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6d6d6d;
+}

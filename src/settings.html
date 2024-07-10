@@ -67,9 +67,11 @@
                         <% if(data[3]){ %><option value="<%- data[3] %>"><%- data[3] %></option><% } %>
                     </select>
                 </div>
+                <br>
+                <button class="btn btn-primary acc_save"><ion-icon name="save-outline"></ion-icon> Save Changes</button>
                 <br><hr>
-                <h2 id="PROFILE" class="subheader">Profile</h2>
-                <br><br>
+                <h2 id="PROFILE" class="subheader">Profile</h2><br>
+                <p class="settxt">This will be shown on your <a href="/profile/@<%- user %>">profile</a>.</p>
                 <h4 class="settings_head">Bio</h4>
                 <p class="settxt">Tell us a bit about yourself:</p>
                 <textarea class="settings_bio" placeholder="What is your favorite food, color, place, etc? Why did you join toastmasters?"></textarea>
@@ -97,17 +99,19 @@
                     <ion-icon name="link-outline" style="width: 30px;height: 30px;"></ion-icon><input placeholder="Social Media #2" maxlength="255" type="text" class="settings_input" style="height: 30px"><div class="flexbreak"></div>
                     <ion-icon name="link-outline" style="width: 30px;height: 30px;"></ion-icon><input placeholder="Social Media #3" maxlength="255" type="text" class="settings_input" style="height: 30px"><div class="flexbreak"></div>
                 </div>
+                <br><button class="btn btn-primary prof_save"><ion-icon name="save-outline"></ion-icon> Save Changes</button>
                 <br><hr>
                 <h2 id="SECURITY" class="subheader">Security</h2>
                 <br>
                 <h4 class="settings_head">Change Password</h4><br>
                 <p class="settxt">Keep your password atleast 8 characters. This website allows most computer characters (including emojis!). Use this to your advantage, but try not to make this interfere with accessibility.</p>
-                <button class="btn btn-warning"><ion-icon name="build-outline"></ion-icon>&nbsp;Change Password&nbsp;</button>
+                <button class="btn btn-warning security_save"><ion-icon name="build-outline"></ion-icon>&nbsp;Change Password&nbsp;</button>
                 <br><br><br>
                 <h5 class="settings_head">More updates arriving in the future...</h5><br><hr>
                 <h2 id="NOTIFICATIONS" class="subheader">Notifications</h2>
                 <br><br>
                 <h4 class="settings_head">Receive notifications..</h4>
+                <p class="settxt">Because there isn't an app yet, notifications will only be shown when the website is open.</p>
                 <div class="settings_notif_checkbox">
                     <label class="form-control">
                         <input type="checkbox" name="checkbox">
@@ -128,14 +132,11 @@
                 </div>
                 <br><br>
                 <h4 class="settings_head">Receive Emails..</h4>
+                <p class="settxt">This will not be activated if you do not have a verified email (you can do so in the <a href="#ACCOUNT">Account</a> section).</p>
                 <div class="settings_notif_checkbox">
                     <label class="form-control">
-                        <input type="checkbox" name="checkbox">
-                        When there are new meeting plans
-                    </label>
-                    <label class="form-control">
                         <input type="checkbox" name="checkbox" />
-                        When there is constructive criticism for your 
+                        When there is constructive criticism for your speech
                     </label>
                     <label class="form-control">
                         <input type="checkbox" name="checkbox" />
@@ -143,12 +144,36 @@
                     </label>
                     <label class="form-control">
                         <input type="checkbox" name="checkbox" />
-                        For Meeting Reminders
+                        For Meeting Reminders and Updates
                     </label>
                 </div>
+                <br><button class="btn btn-primary notif_save"><ion-icon name="save-outline"></ion-icon> Save Changes</button>
                 <br><hr>
-                <h1 style="font-size:99999px"><br></h1>
-                <h2 id="INTERFACE" class="subheader">Interface</h2>
+                <!-- <h1 style="font-size:99999px"><br></h1> -->
+                <h2 id="INTERFACE" class="subheader">Interface</h2><br>
+                <p class="settxt">These will be stored to your computer, not to the server. Suggest Themes and Effects to <a href="mailto:futurevoicesgc@gmail.com">futurevoicesgc@gmail.com</a></p>
+                <h4 class="settings_head">Theme</h4>
+                <div class="dropdown_long">
+                    <select name="theme" class="theme">
+                        <option value="light">Light Mode</option>
+                        <option value="dark">Dark Mode</option> 
+                        <option value="ldtime">Scheduled&nbsp; Light & Dark</option>
+                        <option value="penguin">Penguin Blue</option>
+                        <option value="coffee">Coffee</option>
+                    </select>
+                </div>
+                <br>
+                <h4 class="settings_head">Effects</h4>
+                <h6 class="settxt">These are just for fun, and should not be taken seriously.</h6>
+                <div class="dropdown_long">
+                    <select name="effect" class="effect">
+                        <option value="none">None</option>
+                        <option value="3d">3-D</option> 
+                        <option value="3dmove">3-D Interactive (Warning)</option> 
+                        <option value="bf">Shadow</option>
+                    </select>
+                </div>
+                <br><button class="btn btn-primary interface_save"><ion-icon name="save-outline"></ion-icon> Save Changes</button>
             </div>
         </div>
         <script>data = JSON.parse(`<%- JSON.stringify(data) %>`)</script>

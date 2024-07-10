@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.html") %>
+        <title>Future Voices Toastmasters Website</title>
+        <style>.rec-body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .recorder-container {
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            margin: 5px;
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        #audioPlayer {
+            width: 100%;
+            margin-top: 20px;
+        }
+        </style>
+</head>
+
+<body>
+    <%- include("../partials/sidebar.html") %>
+        <div class="rec-body">
+            <div class="recorder-container">
+                <h1>Voice Recorder</h1>
+                <button id="startRecordingButton" onclick="startRecording()">Start Recording</button>
+                <button id="stopRecordingButton" onclick="stopRecording()" disabled>Stop Recording</button>
+                <audio id="audioPlayer" controls></audio>
+            </div>
+        </div>
+        <script>let mediaRecorder;
+            let recordedChunks = [];
+            let audioPlayer = document.getElementById('audioPlayer');
+            let startButton = document.getElementById('startRecordingButton');
+            let stopButton = document.getElementById('stopRecordingButton');
+            let playButton = document.getElementById('playRecordingButton');
+            let downloadButton = document.getElementById('downloadRecordingButton');
+            
+            function startRecording() {
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(function(stream) {
+                        mediaRecorder = new MediaRecorder(stream);
+                        mediaRecorder.ondataavailable = function(event) {
+                            recordedChunks.push(event.data);
+                        }
+                        mediaRecorder.onstop = function() {
+                            let blob = new Blob(recordedChunks, { type: 'audio/wav' });
+                            recordedChunks = [];
+                            audioPlayer.src = URL.createObjectURL(blob);
+                            playButton.disabled = false;
+                            downloadButton.disabled = false;
+                        }
+                        mediaRecorder.start();
+                        startButton.disabled = true;
+                        stopButton.disabled = false;
+                    })
+                    .catch(function(error) {
+                        console.error('Error accessing microphone:', error);
+                    });
+            }
+            
+            function stopRecording() {
+                mediaRecorder.stop();
+                startButton.disabled = false;
+                stopButton.disabled = true;
+            }
+            
+            function playRecording() {
+                audioPlayer.play();
+            }
+            
+            function downloadRecording() {
+                let blob = new Blob(recordedChunks, { type: 'audio/wav' });
+                let url = URL.createObjectURL(blob);
+                let a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'recording.wav';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function() {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 100);
+            }
+            3</script>
+        <script src="/global.js"></script>
+</body>
+
+</html>

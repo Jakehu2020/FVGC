@@ -81,3 +81,12 @@ if (data[1]) {
         })
     });
 }
+
+document.querySelector('.theme').selectedIndex=["light","dark","ldtime","penguin","coffee"].indexOf(localStorage["theme"])
+document.querySelector('.effect').selectedIndex=["none","3d","3dmove","bf"].indexOf(localStorage["effect"])
+document.querySelector(".interface_save").addEventListener("click", (e) => {
+    localStorage["theme"] = document.querySelector('.theme').value;
+    localStorage["effect"] = document.querySelector('.effect').value;
+    location.hash="#INTERFACE"
+    location.reload();
+});

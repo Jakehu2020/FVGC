@@ -77,3 +77,50 @@ window.addEventListener('beforeunload', function (e) {
     // How to prevent user from leaving:
     // e.preventDefault(); return "";
 });
+
+
+if(localStorage['effect'] == '3d'){
+    Array.from(document.body.children).slice(1,9999).forEach(x => {
+        x.classList.add("threed");
+        Array.from(x.children).forEach(y => {
+            y.classList.add("threed");
+            Array.from(y.children).forEach(z => {
+                z.classList.add("threed");
+            })
+        })
+    });
+}
+if(localStorage['effect'] == '3dmove'){
+    Array.from(document.body.children).slice(1,9999).forEach(x => {
+        x.classList.add("threedinteractive");
+        Array.from(x.children).forEach(y => {
+            y.classList.add("threedinteractive");
+            Array.from(y.children).forEach(z => {
+                z.classList.add("threedinteractive");
+            })
+        })
+    });
+    window.addEventListener("mousemove", e => {
+        document.querySelectorAll(".threedinteractive").forEach(x => {
+            x.style.boxShadow = `${e.clientX/50 - screen.width/100}px ${e.clientY/50 - screen.height/100}px 3px #aeaeae`
+        })
+    })
+}
+if(localStorage['effect'] == 'bf'){
+    Array.from(document.body.children).forEach(x => {
+        x.classList.add("fades");
+        Array.from(x.children).forEach(y => {
+            y.classList.add("fades");
+            Array.from(y.children).forEach(z => {
+                z.classList.add("fades");
+            })
+        })
+    });
+}
+
+if(location.href.includes("/apps/") && window.parent != window){
+    document.querySelector(".sidenavbar").remove();
+    // <iframe src="http://localhost:3000/apps/__" width="300" height="250"></iframe>
+} else {
+    if(parent!=window){ parent.location.href = location.href }
+}

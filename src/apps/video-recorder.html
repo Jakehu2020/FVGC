@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.html") %>
+        <title>Future Voices Toastmasters Website</title>
+        <style>
+            .rec-body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .recorder-container {
+                text-align: center;
+                max-width: 600px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                margin: 5px;
+            }
+
+            button:disabled {
+                background-color: #cccccc;
+                cursor: not-allowed;
+            }
+
+            #videoPlayer {
+                width: 100%;
+                max-width: 600px;
+                margin-top: 20px;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include("../partials/sidebar.html") %>
+        <div class="rec-body">
+            <div class="recorder-container">
+                <h1>Video Recorder</h1>
+                <video id="videoPlayer" autoplay></video>
+                <button id="startRecordingButton" onclick="startRecording()">Start Recording</button>
+                <button id="stopRecordingButton" onclick="stopRecording()" disabled>Stop Recording</button>
+                <button id="playRecordingButton" onclick="playRecording()" disabled>Play Recording</button>
+                <button id="downloadRecordingButton" onclick="downloadRecording()" disabled>Download Recording</button>
+            </div>
+        </div>
+        <script>
+            let mediaRecorder, stream;
+            let recordedChunks = [];
+            let videoPlayer = document.getElementById('videoPlayer');
+            let startButton = document.getElementById('startRecordingButton');
+            let stopButton = document.getElementById('stopRecordingButton');
+            let playButton = document.getElementById('playRecordingButton');
+            let downloadButton = document.getElementById('downloadRecordingButton');
+
+
+            videoPlayer.volume = 0;
+            async function startRecording() {
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                    videoPlayer.srcObject = stream;
+                    videoPlayer.play();
+
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.ondataavailable = function (event) {
+                        recordedChunks.push(event.data);
+                    }
+                    mediaRecorder.onstop = function () {
+                        let blob = new Blob(recordedChunks, { type: 'video/webm' });
+                        recordedChunks = [];
+                        let videoURL = URL.createObjectURL(blob);
+
+                        videoPlayer2 = document.createElement("video");
+                        videoPlayer2.id = "videoPlayer"
+                        videoPlayer2.autoplay = "true"
+                        videoPlayer2.controls = "true"
+                        videoPlayer2.volume = 0;
+                        videoPlayer2.src = videoURL;
+                        videoPlayer.replaceWith(videoPlayer2);
+                        alert(videoURL);
+                        open(videoURL);
+                        videoPlayer.controls = true;
+                        playButton.disabled = false;
+                        downloadButton.href = videoURL;
+                        downloadButton.download = 'recording.webm';
+                        downloadButton.disabled = false;
+                    }
+                    mediaRecorder.start();
+                    startButton.disabled = true;
+                    stopButton.disabled = false;
+                } catch (error) {
+                    console.error('Error accessing media devices:', error);
+                }
+            }
+
+            function stopRecording() {
+                mediaRecorder.stop();
+                startButton.disabled = false;
+                stopButton.disabled = true;
+            }
+
+            function playRecording() {
+                if (recordedChunks.length === 0) {
+                    console.log("No recording available to play.");
+                    return;
+                }
+                let blob = new Blob(recordedChunks, { type: 'video/webm' });
+                let videoURL = URL.createObjectURL(blob);
+                videoPlayer.src = videoURL;
+                videoPlayer.controls = true; // Enable controls for playback
+                videoPlayer.play();
+            }
+
+            function downloadRecording() {
+                if (recordedChunks.length === 0) {
+                    console.log("No recording available to download.");
+                    return;
+                }
+                let blob = new Blob(recordedChunks, { type: 'video/webm' });
+                let url = URL.createObjectURL(blob);
+                let a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'recording.webm';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function () {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 100);
+            }
+
+        </script>
+        <script src="/global.js"></script>
+</body>
+
+</html>

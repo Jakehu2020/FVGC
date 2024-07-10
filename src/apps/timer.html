@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.html") %>
+        <title>Future Voices Toastmasters Website</title>
+        <style>
+            .timer-body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .timer-container {
+                text-align: center;
+            }
+
+            input[type="number"] {
+                padding: 8px;
+                font-size: 16px;
+                width: 118px;
+                margin: 5px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+            }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+            #timerDisplay {
+                font-size: 40px;
+                margin-top: 20px;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include("../partials/sidebar.html") %>
+        <div class="timer-body">
+            <div class="timer-container">
+                <h1>Timer App</h1>
+                <input type="number" id="hoursInput" placeholder="Hours">:
+                <input type="number" id="minutesInput" placeholder="Minutes">:
+                <input type="number" id="secondsInput" placeholder="Seconds">
+                <br>
+                <button onclick="startTimer()">Start Timer</button>
+                <button onclick="pauseTimer()">Pause Timer</button>
+                <button onclick="cancelTimer()">Cancel Timer</button>
+                <div id="timerDisplay">00:00:00</div>
+            </div>
+        </div>
+        <script>
+            let timerInterval;
+            let totalTime;
+            let timerRunning = false;
+            let finish = new Audio("/timer_end.m4a");
+
+            function startTimer() {
+                if (!timerRunning) {
+                    let hours = parseInt(document.getElementById("hoursInput").value) || 0;
+                    let minutes = parseInt(document.getElementById("minutesInput").value) || 0;
+                    let seconds = parseInt(document.getElementById("secondsInput").value) || 0;
+
+                    totalTime = hours * 3600 + minutes * 60 + seconds;
+
+                    if (totalTime > 0) {
+                        timerInterval = setInterval(updateTimerDisplay, 1000);
+                        timerRunning = true;
+                    } else {
+                        Swal.fire({ icon: 'error', title: 'Enter a vaild amount of time', text: "Enter a positive, integer amount of time."})
+                    }
+                } else {
+                    Swal.fire({ icon: 'error', title: 'Timer is not running'})
+                }
+            }
+
+            function updateTimerDisplay() {
+                let hoursDisplay = Math.floor(totalTime / 3600);
+                let minutesDisplay = Math.floor((totalTime % 3600) / 60);
+                let secondsDisplay = totalTime % 60;
+                document.getElementById("timerDisplay").textContent = `${hoursDisplay.toString().padStart(2, '0')}:${minutesDisplay.toString().padStart(2, '0')}:${secondsDisplay.toString().padStart(2, '0')}`;
+                if (totalTime <= 0) {
+                    clearInterval(timerInterval);
+                    timerRunning = false;
+                    Swal.fire({ icon: 'success', title: 'Timer complete'});
+                    finish.play();
+                    resetTimer();
+                }
+                totalTime--;
+            }
+
+            function pauseTimer() {
+                if (timerRunning) {
+                    clearInterval(timerInterval);
+                    timerRunning = false;
+                } else {
+                    Swal.fire({ icon: 'error', title: 'Timer is not running'})
+                }
+            }
+
+            function cancelTimer() {
+                if (!timerRunning) { Swal.fire({ icon: 'error', title: 'Timer is not running', html: "<h6>but we canceled it anyway..</h6>"}) }
+                clearInterval(timerInterval);
+                timerRunning = false;
+                resetTimer();
+            }
+
+            function resetTimer() {
+                document.getElementById("hoursInput").value = "";
+                document.getElementById("minutesInput").value = "";
+                document.getElementById("secondsInput").value = "";
+                document.getElementById("timerDisplay").textContent = "00:00:00";
+            }
+
+        </script>
+        <script src="/global.js"></script>
+</body>
+
+</html>

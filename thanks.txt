@@ -8,3 +8,4 @@ ExpressJS: https://expressjs.com/
 Embedded JS: https://ejs.co/
 SocketIO: https://socket.io/
 Roboto & Material Fonts: https://fonts.google.com/
+TSParticles ConfettiJS: https://confetti.js.org/
