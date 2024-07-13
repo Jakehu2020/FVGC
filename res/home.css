@@ -531,5 +531,10 @@ div.vertical-line {
 }
 
 .startcont {
-    
+    max-height: 650px;
+    height: 650px;
+}
+
+.start_opts {
+    text-align: center;
 }

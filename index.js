@@ -1,4 +1,4 @@
-// BASH: npm install express ejs cookie-parser cors 
+// BASH: npm install express ejs cookie-parser cors cheerio axios
 // Maybe this? googleapis@105 @google-cloud/local-auth@2.1.0 --save
 // https://www.toastmastersclubs.org/welcome/?PtzU
 
@@ -12,6 +12,7 @@ const io = require('socket.io')(server);
 const utils = require("./utils.js");
 const JakeBot = require("./Jakebot.js");
 const nm = require("./nodemailer.js");
+const wotd = require("./wordoftheday.js");
 
 app.engine("html", require("ejs").renderFile);
 app.set("views", "src");
@@ -96,9 +97,9 @@ app.get("/signout", (req, res) => {
     res.clearCookie("_Secure");
     res.redirect("/");
 });
-app.get("/apps/:appID", (req,res) => {
+app.get("/apps/:appID", (req, res) => {
     let x = info(req.cookies);
-    if(!fs.existsSync(`./src/apps/${req.params.appID}.html`)){ return res.status(404).render("404.html", x); }
+    if (!fs.existsSync(`./src/apps/${req.params.appID}.html`)) { return res.status(404).render("404.html", x); }
     res.render(`apps/${req.params.appID}.html`, x);
 })
 app.get("/data", (req, res) => {
@@ -106,9 +107,9 @@ app.get("/data", (req, res) => {
     if (!x.user) { res.redirect("/login?msg=You+Haven't+Logged+In+Yet"); }
     res.render("data.html", x);
 })
-app.get("/data/:appID", (req,res) => {
+app.get("/data/:appID", (req, res) => {
     let x = info(req.cookies);
-    if(!fs.existsSync(`./src/data/${req.params.appID}.html`)){ return res.status(404).render("404.html", x); }
+    if (!fs.existsSync(`./src/data/${req.params.appID}.html`)) { return res.status(404).render("404.html", x); }
     res.render(`data/${req.params.appID}.html`, x);
 })
 
@@ -204,6 +205,9 @@ app.post("/verifycode", (req, res) => {
         delete code[code_input];
     }
 });
+app.post("/wotd", async (req, res) => {
+    res.send(JSON.stringify(await wotd()));
+})
 
 server.listen(3000, () => console.log("Server is starting"));
 
