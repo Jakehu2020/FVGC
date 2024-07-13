@@ -1,3 +1,7 @@
+console.log("%cWarning!", "font-size: 50px; color:orange; text-shadow: -3px -3px #e8ba3f, 5px 5px yellow");
+console.log("%cDO NOT %ccopy and paste anything into this console.  If someone tells you to, they might be trying to steal your account info.", "font-weight: bold;", "font-weight: normal;")
+console.log("I haven't had to encrypt data too seriously yet.. \n\n\n%cdon't make me", "font-weight: bold;")
+
 let params = new URLSearchParams(location.search)
 
 setTimeout(() => {

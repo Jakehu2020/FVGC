@@ -394,5 +394,142 @@ input[type="checkbox"]:checked::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #6d6d6d;
+    color: #878282;
+}
+
+.dc {
+    position: absolute;
+    display: flex;
+    height: 500px;
+    width: 500px;
+    border-radius: 30px;
+    box-shadow: 0px 10px 100px;
+    background: whitesmoke;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.listopp {
+    height: 230px;
+    width: 230px;
+    border-radius: 30px;
+    border: 3px solid rgb(25, 23, 54);
+    margin: 10px;
+    font-size: 30px;
+    transition: all 0.5s;
+}
+
+.iconStart {
+    width: 100px;
+    height: 100px;
+    border-radius: 30px;
+    color: #0288d1;
+}
+
+.listopp:hover {
+    height: 220px;
+    width: 220px;
+    cursor: pointer;
+}
+
+.options {
+    width: 40%;
+    height: 90%;
+}
+
+.optionsul {
+    width: 40%;
+    display: flex;
+}
+
+.plan_opt {
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 40%;
+    cursor: grab;
+}
+
+.plan_icon {
+    width: 30px;
+    height: 30px;
+}
+
+div.vertical-line {
+    width: 1px;
+    background-color: black;
+    height: 1000px;
+}
+
+.plancont {
+    max-height: 500px !important;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.plans_workarea {
+    width: 60%;
+    height: 9000px;
+}
+
+.planned_opt {
+    display: inline-block;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 100%;
+    cursor: grab;
+}
+
+.plan_parameters {
+    display: flex;
+    gap: 50px;
+    /* display: inline-block; */
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* text-align: center; */
+}
+
+.plannumber {
+    padding: 5px;
+    border-radius: 2px;
+    border: 1px solid #aeaeae;
+}
+
+.planselect {
+    width: 300px;
+}
+
+.toprightbin {
+    position: absolute;
+}
+
+.toprightbin:hover {
+    background: red;
+    border-radius: 1px;
+}
+
+.planstartselect {
+    width: 450px;
+}
+
+.saveplans {
+    padding-left: 15px;
+}
+
+.startcont {
+    
 }

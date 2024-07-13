@@ -106,6 +106,11 @@ app.get("/data", (req, res) => {
     if (!x.user) { res.redirect("/login?msg=You+Haven't+Logged+In+Yet"); }
     res.render("data.html", x);
 })
+app.get("/data/:appID", (req,res) => {
+    let x = info(req.cookies);
+    if(!fs.existsSync(`./src/data/${req.params.appID}.html`)){ return res.status(404).render("404.html", x); }
+    res.render(`data/${req.params.appID}.html`, x);
+})
 
 io.on('connection', (socket) => {
     socket.on("chat_send", (author, message) => {

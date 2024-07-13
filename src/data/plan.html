@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.html") %>
+        <title>Plan Meeting - Future Voices Toastmasters Website</title>
+        <link rel="stylesheet" href="/home.css">
+</head>
+
+<body>
+    <%- include("../partials/sidebar.html") %>
+        <br>
+        <h1 class="subheader">Meeting Planner</h1>
+        <div class="subheader">
+            <h5 style="display: inline-block">Meeting Name: &nbsp;</h5><input parameter="Meeting Name/Number" class="inputName"><br><br>
+            <button class="btn btn-success saveplans">Save Plans</button> &nbsp; <button class="btn btn-danger deleteplans">Delete Plans</button><br><br>
+        </div>
+        <div class="container flexbox plancont">
+            <div class="options">
+                <h2 class="subheader">Pieces</h2><br>
+                <ul class="optionsul">
+                    <li class="hidden">
+                        <div class="plan_ionicon_frame_1234 subheader"></div>
+                        <p class="plan_text_1234 subheader">{{ text }}</p>
+                        <p class="planparams">Parameters: {{ params }}</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="plans_workarea">
+                <h2 class="subheader">Your Plan</h2><br>
+                <ul class="optionsul">
+                    <li class="hidden workarea_hid">
+                        <ion-icon name="trash-outline" class="toprightbin"></ion-icon>
+                        <div class="plan_ionicon_frame_1234 subheader">{{ icon }}</div>
+                        <p class="plan_text_1234 subheader">{{ text }}</p>
+                        <div class="plan_parameters">{{ params }}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script src="/data/plan.js"></script>
+        <script src="/global.js"></script>
+</body>
+
+</html>

@@ -4,20 +4,44 @@
 <head>
     <%- include("./partials/head.html") %>
         <title>Meeting Data - Future Voices Toastmasters Website</title>
-        <link rel="stylesheet" href="home.css">
+        <link rel="stylesheet" href="/home.css">
 </head>
 
 <body>
     <%- include("./partials/sidebar.html") %>
-        <div class="container">
-            <h1 class="subheader">Meeting Data</h1>
-            
+        <br>
+        <h1 class="subheader">Meeting Data</h1>
+        <div class="dc">
+            <div class="hline">
+                <button class="listopp" onclick="location.href='/data/plan'">
+                    <ion-icon name="pencil-outline" class="iconStart"></ion-icon>
+                    <br>
+                    Plan Meeting
+                </button>
+                <button class="listopp" onclick="location.href='/data/import'">
+                    <ion-icon name="cloud-upload-outline" class="iconStart"></ion-icon>
+                    <br>
+                    Import Data
+                </button>
+            </div>
+            <br>
+            <div class="hline">
+                <button class="listopp" onclick="location.href='/data/start'">
+                    <ion-icon name="caret-forward-outline" class="iconStart"></ion-icon>
+                    <br>
+                    Start Meeting
+                </button>
+                <button class="listopp" onclick="location.href='/data/export'">
+                    <ion-icon name="cloud-download-outline" class="iconStart"></ion-icon>
+                    <br>
+                    Export Data
+                </button>
+            </div>
         </div>
         <script>
             let user = "<%- user %>";
         </script>
-        <script src="global.js"></script>
-        <script src="tasks.js"></script>
+        <script src="/global.js"></script>
 </body>
 
 </html>
