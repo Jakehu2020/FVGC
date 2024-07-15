@@ -533,8 +533,45 @@ div.vertical-line {
 .startcont {
     max-height: 650px;
     height: 650px;
+    display: block;
 }
 
 .start_opts {
     text-align: center;
+}
+
+.menu {
+    position: absolute;
+    left: 50px;
+    display: none;
+    bottom: 50px;
+    width: 120px;
+    border-radius: 10px;
+    border: 1px solid #aeaeae;
+    padding-left: 10px;
+}
+
+.center {
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.sideflex {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+}
+
+.sideflex div {
+    display: inline-block;
+}
+
+.frame {
+    border-radius: 10px;
+}
+
+h0 {
+    font-size: 50px;
 }

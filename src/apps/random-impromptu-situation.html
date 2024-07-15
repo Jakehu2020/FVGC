@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.html") %>
+        <title>Impromptu Situation Generator - Future Voices Toastmasters Website</title>
+        <style>
+            .rpg-body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .container {
+                text-align: center;
+            }
+
+            h1 {
+                color: #333;
+            }
+
+            #speechOutput {
+                margin: 20px 0;
+                padding: 10px;
+                border: 1px solid #ccc;
+                min-height: 100px;
+            }
+
+            button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include("../partials/sidebar.html") %>
+        <div class="rpg-body">
+            <div class="container">
+                <h1>Impromptu Situation Generator</h1>
+                <br>
+                <h3 id="promptOutput">
+                    <!-- Prompt output will be displayed here -->
+                </h3>
+                <button id="generateButton">Generate Prompt</button>
+            </div>
+        </div>
+        <script>
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "/impromptu.txt", true);
+            xhr.send();
+            let prompts;
+            xhr.onload = () => { prompts = xhr.responseText.split("\n") };
+            
+            document.getElementById('generateButton').addEventListener('click', () => {
+                const randomIndex = Math.floor(Math.random() * prompts.length);
+                const prompt = prompts[randomIndex];
+                document.getElementById('promptOutput').innerText = prompt;
+
+                if (localStorage.joyful == "true") {
+                    confetti({
+                        particleCount: 100,
+                        spread: 400,
+                        origin: { y: 0.6 },
+                    });
+                }
+            });
+        </script>
+        <script src="/global.js"></script>
+</body>
+
+</html>

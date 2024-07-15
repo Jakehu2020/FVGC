@@ -10,14 +10,14 @@ const options = {
         desc: "Game: Play a Simple & Fun Word Game",
         params: {
             "Rounds": { type: "number" },
-            "Type": { type: "select", select: ["Linxicon", "One Word", "Telephone", "20 Questions", "Contexto", "Spelling Bee"] }
+            "Type": { type: "select", select: ["Linxicon", "One Word", "Telephone", "20 Questions", "Contexto", "Spelling Bee", "Wordle"] }
         }
     },
     intro: {
         icon: 'chatbubble-ellipses-outline',
         timemin: 10,
         timemax: 30,
-        desc: "Simple Introduction: 1 minute per person",
+        desc: "Simple Introduction: 1 per person",
         params: {
             "Advice?": { type: "checkbox" },
         }
@@ -148,14 +148,13 @@ document.querySelector(".saveplans").addEventListener('click', (e) => {
             params
         })
     });
-    let currentdata = atob(localStorage.plandata);
-    let x = JSON.parse(currentdata.substring(4, currentdata.length - 7));
+    let x = JSON.parse(atob(localStorage.plandata));
     x[document.querySelector(".inputName").value] = plan;
-    localStorage['plandata'] = btoa("stop" + JSON.stringify(x) + "hacking");
+    localStorage['plandata'] = btoa(JSON.stringify(x));
     updates = 0;
 });
 
-let plan_inputs = Object.getOwnPropertyNames(JSON.parse(atob(localStorage.plandata).substring(4, (atob(localStorage.plandata)).length - 7)))
+let plan_inputs = Object.getOwnPropertyNames(JSON.parse(atob(localStorage.plandata)))
 Swal.fire({
     icon: 'info',
     title: "What plan are you editing?",
@@ -167,7 +166,8 @@ Swal.fire({
     showCancelButton: true,
     showCloseButton: true
 }).then(result => {
-    let plan = JSON.parse(atob(localStorage.plandata).substring(4, (atob(localStorage.plandata)).length - 7))[plan_inputs[result.value]];
+    window.PLANNAME = plan_inputs[result.value];
+    let plan = JSON.parse(atob(localStorage.plandata))[plan_inputs[result.value]];
     document.querySelector(".inputName").value = plan_inputs[result.value] || "";
     plan.forEach(val => {
         const template = document.querySelector(".workarea_hid").cloneNode(true);
@@ -193,5 +193,12 @@ Swal.fire({
 
 window.addEventListener('beforeunload', function (e) {
     if (updates) { e.preventDefault(); return ""; }
-    document.querySelector(".saveplans").click();
 });
+
+document.querySelector(".deleteplans").addEventListener("click", (e) => {
+    let plans = JSON.parse(atob(localStorage.plandata));
+    delete plans[window.PLANNAME];
+    console.log(plans);
+    localStorage.plandata = btoa(JSON.stringify(plans));
+    // location.reload();
+})

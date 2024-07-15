@@ -26,7 +26,6 @@ try {
     }
 } catch (e) { / Just the URL.. / }
 
-let socket = io();
 document.body.scrollTop = document.documentElement.scrollTop = 0;
 
 let notifications = [];

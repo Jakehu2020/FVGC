@@ -1,4 +1,7 @@
 const log = document.querySelector(".chatlog");
+
+socket = io();
+
 socket.emit("userconnect", user);
 function addMSG(a,b){
     document.querySelector(".chat_container").style.border = "1px solid black";
