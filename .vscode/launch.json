@@ -8,7 +8,12 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\index.js"
+            "program": "${workspaceFolder}\\index.js",
+
+            "env": {
+                "secretpass": "Hello.\n\nFirst, let me to thank thy curiosity as a means to fulfill the discovery of which this password as brought upon thou. It has been my pleasure to code such a daunting website. Sadly, Github has limits which cannot be overridden as I write this message. At this correct moment of time, thou hast camest to these words to bypass a code at which such has been made.\n\nWith sincere gratitude, respect, and yet sadness,\n   I sign my name.",
+                "nodemailer": "amwxshhhazeulija"
+            }
         }
     ]
 }

@@ -72,9 +72,9 @@ function keyEvent(key, press) {
     })
 }
 
-function post(uri, data) {
+function post(uri, data, method='POST') {
     return fetch(uri, {
-        method: 'POST',
+        method,
         headers: {
             'Content-Type': 'application/json'
         },

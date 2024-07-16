@@ -16,6 +16,8 @@ const wotd = require("./wordoftheday.js");
 
 app.engine("html", require("ejs").renderFile);
 app.set("views", "src");
+app.set('trust proxy', true)
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("res"));
@@ -207,6 +209,25 @@ app.post("/verifycode", (req, res) => {
 });
 app.post("/wotd", async (req, res) => {
     res.send(JSON.stringify(await wotd()));
+});
+app.post("/people/:type", (req, res) => {
+    return res.send(JSON.stringify(utils.json.get("names", res.params.type)));
+});
+app.put("/exportall", (req,res) => {
+    if(req.body.password != process.env.secretpass){ return res.send("👾: 🍚🍜🥫🥖🍟🥫") }
+    res.send(JSON.stringify([utils.json_gf("names"),utils.json_gf("profiles"),utils.json_gf("tasks"),utils.json_gf("users")]));
+    var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
+
+    console.log("USER DATA EXPORT", ip);
+})
+app.put("/import/:dataF", (req,res) => {
+    if(req.body.password != process.env.secretpass){ return res.send("👾: 🍚🍜🥫🥖🍟🥫") }
+    
+    utils.json_sf(req.params.dataF, req.body.data);
+    res.send("👾:🍚🍜🥫🥖🍟");
+    var ip = req.ip;
+
+    console.log("USER DATA IMPORT", ip);
 })
 
 server.listen(3000, () => console.log("Server is starting"));

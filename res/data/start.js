@@ -7,26 +7,29 @@ function shuffleArray(array) {
 }
 
 document.fullscreenElement = document.querySelector(".startcont");
-document.querySelector(".fullscreen").addEventListener("click", (e) => {
+document.querySelector(".fullscreen").addEventListener("click", async (e) => {
     document.querySelector(".startcont").requestFullscreen();
-    start();
+    await start();
 })
 
-// let plan_inputs = Object.getOwnPropertyNames(JSON.parse(atob(localStorage.plandata)))
-// Swal.fire({
-//     icon: "question",
-//     title: 'What meeting are you starting?',
-//     input: "select",
-//     inputOptions: plan_inputs,
-//     customClass: { input: "planstartselect" },
-//     confirmButtonText: "Select",
-//     allowOutsideClick: false,
-// }).then(result => {
-//     window.plan = JSON.parse(atob(localStorage.plandata))[plan_inputs[result.value]];
-// })
+let plan_inputs = Object.getOwnPropertyNames(JSON.parse(atob(localStorage.plandata)))
+Swal.fire({
+    icon: "question",
+    title: 'What meeting are you starting?',
+    input: "select",
+    inputOptions: plan_inputs,
+    customClass: { input: "planstartselect" },
+    confirmButtonText: "Select",
+    allowOutsideClick: false,
+}).then(result => {
+    window.plan = JSON.parse(atob(localStorage.plandata))[plan_inputs[result.value]];
+})
 
-function start() {
+async function start() {
     document.querySelector(".menu").style.display = "block";
+    window.plan.forEach(async piece => {
+        pieces[piece.name](params);
+    })
 }
 
 const pieces = {
