@@ -1,4 +1,4 @@
-location.hash = "";
+location.hash = ""; let updates = false;
 document.querySelectorAll("tr").forEach(x => {
     x.addEventListener("click", (e) => {
         location.hash = "#" + x.innerText;
@@ -84,9 +84,84 @@ if (data[1]) {
 
 document.querySelector('.theme').selectedIndex=["light","dark","ldtime","penguin","coffee"].indexOf(localStorage["theme"])
 document.querySelector('.effect').selectedIndex=["none","3d","3dmove","bf"].indexOf(localStorage["effect"])
+
+function gbVal(n, x=document){
+    let ele = x.querySelector(`[name='${n}']`) || x.querySelector(`.${n}`);
+    return ele.value || ele.checked || Array.from(ele.querySelectorAll('input[type="checkbox"]')).map(x => x.checked);
+}
+function gbEle(n, x=document){
+    return x.querySelector(`[name='${n}']`) || x.querySelector(`.${n}`);
+}
+
+let pfpdata = window.pfpdata || {};
+if(Object.keys(pfpdata).length != 0){
+    Object.getOwnPropertyNames(pfpdata).forEach(name => {
+        let ele = gbEle(name), prop = pfpdata[name];
+        if(!ele){ return; }
+        if(typeof prop == "boolean"){ ele.checked = prop; }
+        else if(typeof prop == "string"){ ele.value = prop; }
+        else if(typeof prop == "object"){
+            console.log(name, ele, prop);
+            ele.querySelectorAll("input[type='checkbox']").forEach((check, i) => { check.checked = prop[i]; });
+        }
+    })
+}
+document.querySelector(".acc_save").addEventListener('click', (e) => {
+    testInternet(true);
+    Object.assign(pfpdata, { 
+        fullname: gbVal("fullname"),
+        role: gbVal("role"),
+    });
+    sendSave();
+})
+document.querySelector(".prof_save").addEventListener('click', (e) => {
+    testInternet(true);
+    Object.assign(pfpdata, { 
+        settings_bio: gbVal("settings_bio") || "",
+        pronouns: gbVal("pronouns") || "",
+        website: gbVal("website") || "",
+        sm1: gbVal("sm1") || "",
+        sm2: gbVal("sm2") || "",
+        sm3: gbVal("sm3") || "",
+    });
+    sendSave();
+})
+document.querySelector(".notif_save").addEventListener('click', (e) => {
+    testInternet(true);
+    Object.assign(pfpdata, { 
+        notifications_check: gbVal("notifications_check") || [],
+        email_check: gbVal("email_check") || [],
+    });
+    sendSave();
+})
 document.querySelector(".interface_save").addEventListener("click", (e) => {
-    localStorage["theme"] = document.querySelector('.theme').value;
-    localStorage["effect"] = document.querySelector('.effect').value;
-    location.hash="#INTERFACE"
-    location.reload();
+    localStorage["theme"] = gbVal('theme');
+    localStorage["effect"] = gbVal('effect');
+    localStorage["confetti"] = gbVal('confetti');
+    localStorage["checkbox"] = gbVal('checkbox');
+    location.hash="#INTERFACE";
 });
+
+function sendSave(){
+    if(!testInternet(false)){ return; };
+    return post("/setting", { data: pfpdata, user }).then(res => {
+        updates = false;
+    });
+    // console.log("save");
+    // updates = false;
+}
+
+Array.from(document.querySelectorAll("input")).concat(Array.from(document.querySelectorAll("select"))).forEach(ele => {
+    ele.addEventListener("change", (e) => {
+        updates = true;
+    })
+})
+
+window.addEventListener('beforeunload', function (e) {
+    if (updates) { sendSave(); e.preventDefault(); return ""; }
+});
+window.addEventListener("scroll",(e) => {
+    document.querySelector(".stb").style.top = window.scrollY+"px";
+});
+
+setInterval(sendSave, 5000);

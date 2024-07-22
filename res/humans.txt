@@ -1,0 +1,35 @@
+/* TEAM */
+	Full Stack Developer: Jake Hu
+	Contact: hujake2020@gmail.com
+	From: Little Rock, USA
+
+/* SITE */
+	Last update: 2024/7/19
+    Standards: HTML5, CSS3, ES14
+	Language: English,
+    Components: Bootstrap, JQuery, Ionic, Sweetalert, ExpressJS, EJS, SocketIO, ConfettiJS
+	Doctype: HTML5
+	Software: VSCode
+                        ___
+                        \xx\
+                          \\
+    _______________________|___
+  /                     _  |  /|
+ /                 ====| |   //
+/                       ‾   //|
+|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|//
+ ‾|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|  /
+  |     Toastmasters     | /
+  |______________________|/
+       |           |  |
+       |           |  |
+       |           |  |____
+    ___|           |  /   /|
+   /   |     TM    | /   / |
+  /____|           |/___/  |
+  |    Future Voices    |  |
+  |      Gavel Club     | /
+  |_____________________|/
+
+
+Future voices Gavel Club website is a website made specific for the Future Voices Toastmasters Gavel Club, located in Little Rock, Arkansas.

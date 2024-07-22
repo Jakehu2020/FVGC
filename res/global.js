@@ -7,10 +7,10 @@ let params = new URLSearchParams(location.search)
 function resize_navbar() {
     setTimeout(() => {
         if (document.querySelector(".sidebar_ul")) {
-            document.querySelector(".sidebar_ul").style.height = innerHeight - 134 + "px";
+            document.querySelector(".sidebar_ul").style.height = innerHeight - 128 + "px";
         }
         if (document.querySelector(".sidebarstart_ul")) {
-            document.querySelector(".sidebarstart_ul").style.height = innerHeight - 78 + "px";
+            document.querySelector(".sidebarstart_ul").style.height = innerHeight - 72 + "px";
         }
     }, 20);
 }
@@ -19,9 +19,12 @@ window.addEventListener("resize", resize_navbar);
 resize_navbar();
 
 try {
-    if (location.href.endsWith("/~")) {
+    if (location.href.endsWith("/data/")) {
+        document.querySelector(".DATA").classList.add("active");
+    } else if (location.href.endsWith("/~")) {
         document.querySelector(".HOME").classList.add("active");
     } else if (document.querySelector("." + location.pathname.substring(1, 999).toUpperCase())) {
+        console.log("s")
         document.querySelector("." + location.pathname.substring(1, 999).toUpperCase()).classList.add("active");
     }
 } catch (e) { / Just the URL.. / }
@@ -72,7 +75,19 @@ function keyEvent(key, press) {
     })
 }
 
-function post(uri, data, method='POST') {
+function testInternet(txt = false) {
+    if (txt && !window.navigator.onLine) {
+        return Swal.fire({
+            icon: 'error',
+            title: 'No internet connection',
+            text: "You don't have any internet right now.."
+        })
+    }
+    return window.navigator.onLine;
+}
+
+function post(uri, data = {}, method = 'POST') {
+    testInternet(true);
     return fetch(uri, {
         method,
         headers: {
@@ -133,3 +148,4 @@ if (location.href.includes("/apps/") && window.parent != window) {
 } else {
     if (parent != window) { parent.location.href = location.href }
 }
+

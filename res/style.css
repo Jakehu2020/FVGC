@@ -1,15 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap');
 
 * {
-    transition: all 0.5s;
-}
-
-html {
-    overflow-x: hidden none;
+    transition: all 1s;
 }
 
 body {
-    background: #e5e7eb;
+    background: #e5e7eb !important;
+    overflow-x: hidden;
 }
 
 .overtext {
@@ -168,4 +165,8 @@ main {
 
 .large {
     font-size: 50px;
+}
+pre.whitespacenormal, code.whitespacenormal {
+    /* white-space: normal; */
+    line-height: 15px;
 }

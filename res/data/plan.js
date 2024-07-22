@@ -162,6 +162,9 @@ Swal.fire({
     inputOptions: plan_inputs,
     customClass: { input: "planstartselect" },
     confirmButtonText: "Select",
+    inputAttributes: {
+        "aria-label": "Selected Meeting"
+    },
     cancelButtonText: "No, I'm starting a new plan",
     showCancelButton: true,
     showCloseButton: true

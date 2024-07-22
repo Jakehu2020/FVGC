@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /$
+Allow: /~$
+Allow: /calendar$
+Allow: /login$
+Allow: /signup$
+Allow: /news$

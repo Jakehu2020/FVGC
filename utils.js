@@ -1,7 +1,6 @@
 const fs = require('fs');
 function json_check(x,a){
-    let j=JSON.parse(fs.readFileSync("/data/" + x + ".json"));
-    return j[a]!=undefined;
+    return fs.existsSync("./data/" + x + ".json") || JSON.parse(fs.readFileSync("./data/" + x + ".json"))[a]!=undefined;
 }
 function json_set(x,a,b){
     let j=JSON.parse(fs.readFileSync("./data/" + x + ".json"));
@@ -9,8 +8,7 @@ function json_set(x,a,b){
     return fs.writeFileSync("./data/" + x + ".json", JSON.stringify(j));
 }
 function json_get(x,a){
-    let j=JSON.parse(fs.readFileSync("./data/" + x + ".json"));
-    return j[a];
+    return JSON.parse(fs.readFileSync("./data/" + x + ".json"))[a];
 }
 function json_gf(x){
     return JSON.parse(fs.readFileSync("./data/" + x + ".json"));

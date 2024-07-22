@@ -215,6 +215,8 @@ button.trash {
     /* border: 1px solid black; */
     border-collapse: collapse;
     padding: 5px;
+    position: relative;
+    /* position: fixed; */
 }
 
 td {
@@ -555,7 +557,7 @@ div.vertical-line {
     display: inline-block;
     justify-content: space-between;
     align-items: center;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .sideflex {
@@ -574,4 +576,8 @@ div.vertical-line {
 
 h0 {
     font-size: 50px;
+}
+
+.chat_label {
+    font-size: 25px;
 }

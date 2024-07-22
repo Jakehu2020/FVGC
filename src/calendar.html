@@ -8,7 +8,11 @@
 </head>
 
 <body>
-    <%- include("./partials/sidebar.html") %>
+    <% if(user){ %>
+        <%- include("./partials/sidebar.html") %>
+    <% } else { %>
+        <%- include("./partials/sidebar_start.html") %>
+    <% } %>
         <div class="container">
             <h1 class="subheader">Calendar</h1>
             <!-- <iframe
@@ -18,11 +22,10 @@
     style="background:url('https://raw.githubusercontent.com/niccokunzmann/open-web-calendar/master/static/img/loaders/circular-loader.gif') center center no-repeat;"
     src="https://open-web-calendar.hosted.quelltext.eu/calendar.html?hour_format=%25g%3A%25i%E2%80%AF%25a&amp;style-event-status-cancelled=true&amp;style-event-status-confirmed=true&amp;style-event-status-tentative=true&amp;url=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fical%2Ffuturevoicesgc%2540gmail.com%2Fpublic%2Fbasic.ics"
     sandbox="allow-scripts allow-same-origin allow-top-navigation"
-    allowTransparency="true" scrolling="no" 
+    allowTransparency="true" scrolling="no" title="Calendar"
     frameborder="0" height="600px" width="100%"></iframe>
         </div>
         <script src="global.js"></script>
-        <script src="calendar.js"></script>
 </body>
 
 </html>

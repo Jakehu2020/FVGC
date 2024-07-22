@@ -32,7 +32,8 @@ function info(req) {
     if (req.usr_token && req.secure && utils.confirm_identity(req.usr_token, req.usr_key, req.secure, req._Secure)) {
         return {
             user: utils.crypt.decodeb64(req.usr_token),
-            data: utils.json_get("users", utils.crypt.decodeb64(req.usr_token))
+            data: utils.json_get("users", utils.crypt.decodeb64(req.usr_token)),
+            pfpdata: utils.json_get("profiles", utils.crypt.decodeb64(req.usr_token))
         }
     };
     return {
@@ -68,7 +69,7 @@ app.get("/chat", (req, res) => {
 });
 app.get("/calendar", (req, res) => {
     let x = info(req.cookies);
-    if (!x.user) { res.redirect("/login?msg=You+Haven't+Logged+In+Yet"); };
+    // if (!x.user) { res.redirect("/login?msg=You+Haven't+Logged+In+Yet"); };
     res.render("calendar.html", x)
 });
 app.get("/tasks", (req, res) => {
@@ -81,11 +82,6 @@ app.get("/apps", (req, res) => {
     let x = info(req.cookies);
     if (!x.user) { res.redirect("/login?msg=You+Haven't+Logged+In+Yet"); }
     res.render("apps.html", x)
-});
-app.get("/calendar", (req, res) => {
-    let x = info(req.cookies);
-    if (!x.user) { res.redirect("/login?msg=You+Haven't+Logged+In+Yet"); }
-    res.render("calendar.html", x);
 });
 app.get("/settings", (req, res) => {
     let x = info(req.cookies);
@@ -143,10 +139,10 @@ app.post("/login", (req, res) => {
     let user = req.body.login;
     let pass = req.body.password;
     if (utils.json_get("users", user) && utils.crypt.decodeb64(utils.json_get("users", user)[0]) == pass) {
-        res.cookie("usr_token", utils.crypt.encodeb64(user), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000 })
-        res.cookie("usr_key", utils.crypt.encodehex(user), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000 })
-        res.cookie("secure", utils.crypt.encodeb64(pass), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000 })
-        res.cookie("_Secure", utils.crypt.encodehex(pass), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000 })
+        res.cookie("usr_token", utils.crypt.encodeb64(user), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000, secure: true })
+        res.cookie("usr_key", utils.crypt.encodehex(user), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000, secure: true })
+        res.cookie("secure", utils.crypt.encodeb64(pass), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000, secure: true })
+        res.cookie("_Secure", utils.crypt.encodehex(pass), { httpOnly: true, maxAge: req.body.stayin ? 2592000000 : 259200000, secure: true })
         res.redirect("/~");
     } else {
         res.redirect("/login?msg=Couldn't+Find+Your+Account");
@@ -211,7 +207,12 @@ app.post("/wotd", async (req, res) => {
     res.send(JSON.stringify(await wotd()));
 });
 app.post("/people/:type", (req, res) => {
-    return res.send(JSON.stringify(utils.json.get("names", res.params.type)));
+    console.log(req.params.type);
+    try{
+        return res.send(JSON.stringify(utils.json_get("names", req.params.type)));
+    } catch(e) {
+        return res.send("The poor user tried to manipulate the action.. I mean 👾: 🍚🍜🥫🥖🍟🥫");
+    }
 });
 app.put("/exportall", (req,res) => {
     if(req.body.password != process.env.secretpass){ return res.send("👾: 🍚🍜🥫🥖🍟🥫") }
@@ -228,11 +229,19 @@ app.put("/import/:dataF", (req,res) => {
     var ip = req.ip;
 
     console.log("USER DATA IMPORT", ip);
+});
+app.post("/setting", (req, res) => {
+    if(req.body.user != info(req.cookies).user){ return res.send("👾: 🍚🍜🥫🥖🍟🥫") };
+
+    let file = utils.json_get("profiles", req.body.user);
+    Object.assign(file, req.body.data);
+    utils.json_set("profiles", req.body.user, req.body.data);
+    res.send("👾:🍚🍜🥫🥖🍟")
 })
 
 server.listen(3000, () => console.log("Server is starting"));
 
 app.use((req, res, next) => {
-    res.status(404).render("404.html", info(req.cookies));
+    res.render("404.html", info(req.cookies));
     next();
 });
