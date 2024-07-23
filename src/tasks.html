@@ -10,7 +10,10 @@
 <body>
     <%- include("./partials/sidebar.html") %>
         <div class="container">
-            <h1 class="subheader">Task Manager</h1>
+            <div class="subheader">
+                <h1 class="subheader">Task Manager</h1>
+                <button class="btn btn-primary save"><ion-icon name="save-outline"></ion-icon> Save Changes</button><br><br>
+            </div>
             <ul class="task-list">
                 <li class="task-item hidden">
                     <button class="checkmark"><ion-icon name="ellipse-outline" style="width: 30px; height: 30px"></ion-icon></button>
@@ -27,7 +30,7 @@
         </div>
         <script>
             let user = "<%- user %>";
-            let tasks = JSON.parse(`<%- JSON.stringify(tasks) %>`);
+            let tasks_dat = JSON.parse(`<%- JSON.stringify(tasks) %>`);
         </script>
         <script src="global.js"></script>
         <script src="tasks.js"></script>

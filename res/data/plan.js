@@ -203,5 +203,4 @@ document.querySelector(".deleteplans").addEventListener("click", (e) => {
     delete plans[window.PLANNAME];
     console.log(plans);
     localStorage.plandata = btoa(JSON.stringify(plans));
-    // location.reload();
 })

@@ -1,5 +1,4 @@
 // BASH: npm install express ejs cookie-parser cors cheerio axios
-// Maybe this? googleapis@105 @google-cloud/local-auth@2.1.0 --save
 // https://www.toastmastersclubs.org/welcome/?PtzU
 
 const express = require("express");
@@ -148,26 +147,35 @@ app.post("/login", (req, res) => {
         res.redirect("/login?msg=Couldn't+Find+Your+Account");
     }
 });
+// app.post("/tasks", (req, res) => {
+//     let taskJSON = utils.json_get("tasks");
+//     let USER = info(req.cookies).user;
+//     if (!USER) { return; }
+//     let request = req.body.request;
+    
+//     if (request == "create") {
+//         taskJSON[USER].push([req.body.text, false, false]);
+//         // req.body = { request: "create", text: "..."}
+//     } else if (request == "toggle") {
+//         let i = taskJSON[USER].findIndex(a => a[0] == req.body.task)
+//         taskJSON[USER][i][1] = !taskJSON[USER][i][1];
+//         // req.body = { request: "toggle", task: "..."}
+//     } else if (request == "delete") {
+//         let i = taskJSON[USER].findIndex(a => a[0] == req.body.task);
+//         if (i == -1 || !taskJSON[USER][i] || taskJSON[USER][i][2]) { return; }
+//         taskJSON[USER].splice(i, 1);
+//         // req.body = { request: "delete", task: "..."}
+//     }
+//     utils.json_sf("tasks", JSON.stringify(taskJSON));
+// });
+
 app.post("/tasks", (req, res) => {
-    let taskJSON = utils.json_gf("tasks");
-    let USER = info(req.cookies).user;
-    if (!USER) { return; }
-    let request = req.body.request;
-    if (request == "create") {
-        taskJSON[USER].push([req.body.text, false, false]);
-        // req.body = { request: "create", text: "..."}
-    } else if (request == "toggle") {
-        let i = taskJSON[USER].findIndex(a => a[0] == req.body.task)
-        taskJSON[USER][i][1] = !taskJSON[USER][i][1];
-        // req.body = { request: "toggle", task: "..."}
-    } else if (request == "delete") {
-        let i = taskJSON[USER].findIndex(a => a[0] == req.body.task);
-        if (i == -1 || !taskJSON[USER][i] || taskJSON[USER][i][2]) { return; }
-        taskJSON[USER].splice(i, 1);
-        // req.body = { request: "delete", task: "..."}
-    }
-    utils.json_sf("tasks", JSON.stringify(taskJSON));
+    if(req.body.user != info(req.cookies).user){ console.log("hi"); return res.send("👾: 🍚🍜🥫🥖🍟🥫") };
+    utils.json_set("tasks", req.body.user, req.body.data);
+
+    return res.send("👾:🍚🍜🥫🥖🍟");
 });
+
 
 let code = {}, tms = [];
 app.post("/verifyemail", (req, res) => {

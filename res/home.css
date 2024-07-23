@@ -48,6 +48,8 @@ body {
     /* position: absolute; */
     left: auto;
     right: auto;
+    overflow-y: scroll;
+    height: 500px;
 }
 
 .sidenavbar {
