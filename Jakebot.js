@@ -18,7 +18,6 @@ let CMD_OBJ = {
     random, fortune
 }
 function run(cmd){
-    // /Jakebot 111
     let command  = cmd.substr(9,cmd.length);;
     if(!cmd.startsWith("/Jakebot ")){ return null; }
     if(Object.getOwnPropertyNames(CMD_OBJ).includes(command.substring(0,command.indexOf("(")))){
