@@ -126,6 +126,7 @@ io.on('connection', (socket) => {
 app.post("/signup", (req, res) => {
     let user = req.body.login;
     let pass = req.body.password;
+    console.log(utils.json_check("users", user), user);
     if (!utils.json_check("users", user)) {
         utils.json_set("users", user, [utils.crypt.encodeb64(pass), null]);
         utils.json_set("tasks", user, [])

@@ -1,6 +1,6 @@
 const fs = require('fs');
 function json_check(x,a){
-    return fs.existsSync("./data/" + x + ".json") || JSON.parse(fs.readFileSync("./data/" + x + ".json"))[a]!=undefined;
+    return fs.existsSync("./data/" + x + ".json") && JSON.parse(fs.readFileSync("./data/" + x + ".json"))[a]!=undefined;
 }
 function json_set(x,a,b){
     let j=JSON.parse(fs.readFileSync("./data/" + x + ".json"));
